@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "701222800972",
+    "project_id": "modeloangenda",
+    "storage_bucket": "modeloangenda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701222800972:android:185c3134b4af300432aee9",
+        "android_client_info": {
+          "package_name": "com.example.proyectomodelo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "701222800972-sgb9ahlh4ct970fobgs024aitthan6g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn-587zYTT4CjsSodIvEtnuNDiJ6jqxag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "701222800972-sgb9ahlh4ct970fobgs024aitthan6g2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
