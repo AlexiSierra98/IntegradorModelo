@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyectomodelo/Screens/Login.dart';
 import 'package:proyectomodelo/Screens/home.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:proyectomodelo/Screens/register.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -24,8 +25,9 @@ class MyApp extends StatelessWidget {
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => const loginPage(),
+        '/register': (context) => const registerPage(),
         // When navigating to the "/second" route, build the SecondScreen widget.
-        '/second': (context) => const homePage(),
+        '/home': (context) => const homePage(),
       },
       theme: ThemeData(
         // This is the theme of your application.

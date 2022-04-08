@@ -13,10 +13,9 @@ class loginPage extends StatefulWidget {
 class _loginPageState extends State<loginPage> {
   final _formKey = GlobalKey<FormState>();
 
-  AuthService _auth = AuthService();
-
-  String email = '';
-  String password = '';
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +30,25 @@ class _loginPageState extends State<loginPage> {
             SizedBox(
               height: 50,
             ),
-            TextFormField(onChanged: (val) {
-              setState(() => email = val);
-            }),
+            TextFormField(
+              textInputAction: TextInputAction.next,
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
+              onSaved: (value) {
+                emailController.text = value!;
+              },
+            ),
             SizedBox(
               height: 50,
             ),
             TextFormField(
-                obscureText: true,
-                onChanged: (val) {
-                  setState(() => password = val);
-                }),
+              autofocus: false,
+              controller: passwordController,
+              obscureText: true,
+              onSaved: (value) {
+                passwordController.text = value!;
+              },
+            ),
             SizedBox(
               height: 50,
             ),
@@ -51,27 +58,49 @@ class _loginPageState extends State<loginPage> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                  /*
-                  dynamic result = await _auth.signInAnon();
-                  if (result == null) {
-                    print('Error');
-                  } else {
-                    print('sign in');
-                    Navigator.of(context).pushNamed('/second');
-                  }
-                  print(email);
-                  print(password);
-                  */
-
                   try {
-                    UserCredential credential = await FirebaseAuth.instance
-                        .signInWithEmailAndPassword(
-                            email: email, password: password);
-                    Navigator.of(context).pushNamed('/second');
+                    await _auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+                    Navigator.of(context).pushNamed('/home');
+                    print(emailController.text);
+                    print(passwordController.text);
+                  } on FirebaseAuthException catch (error) {
+                    switch (error.code) {
+                      case "invalid-email":
+                        "Your email address appears to be malformed.";
+                        break;
+                      case "wrong-password":
+                        "Your password is wrong.";
+                        break;
+                      case "user-not-found":
+                        "User with this email doesn't exist.";
+                        break;
+                      case "user-disabled":
+                        "User with this email has been disabled.";
+                        break;
+                      case "too-many-requests":
+                        "Too many requests";
+                        break;
+                      case "operation-not-allowed":
+                        "Signing in with Email and Password is not enabled.";
+                        break;
+                      default:
+                        "An undefined Error happened.";
+                    }
+                    print(error.code);
                   } catch (e) {
-                    print(e.toString());
-                    return null;
+
                   }
+                }),
+            SizedBox(
+              height: 50,
+            ),
+            ElevatedButton(
+                child: Text(
+                  'Registrarse',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/register');
                 })
           ],
         ),
