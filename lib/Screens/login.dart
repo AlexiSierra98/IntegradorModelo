@@ -20,17 +20,17 @@ class _loginPageState extends State<loginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff6f00ff),
-      body: Column(
-        children: [
-          SingleChildScrollView(
-            child: Stack(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
               children: [
                 this._logoTexto(),
                 this.__formularioLogin(),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -64,7 +64,7 @@ class _loginPageState extends State<loginPage> {
   Widget __formularioLogin() {
     Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(top: size.height * 0.35),
+      margin: EdgeInsets.only(top: size.height * 0.45),
       child: Form(
         key: _formKey,
         child: Column(
@@ -105,6 +105,8 @@ class _loginPageState extends State<loginPage> {
                 autofocus: false,
                 controller: passwordController,
                 obscureText: true,
+                style: TextStyle(
+                    fontSize: size.height * 0.018, color: Colors.white),
                 onSaved: (value) {
                   passwordController.text = value!;
                 },
